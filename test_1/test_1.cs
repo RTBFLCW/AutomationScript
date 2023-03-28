@@ -56,7 +56,8 @@ namespace test_1
 	using System.Globalization;
 	using System.Text;
 	using Skyline.DataMiner.Automation;
-	
+	using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+
 	/// <summary>
 	/// Represents a DataMiner Automation script.
 	/// </summary>
@@ -68,7 +69,12 @@ namespace test_1
 		/// <param name="engine">Link with SLAutomation process.</param>
 		public void Run(IEngine engine)
 		{
-	
+			var mySystem = engine.GetDms();
+			var myElements = mySystem.GetElements();
+			foreach ( var element in myElements )
+			{
+				engine.GenerateInformation(element.Name);
+			}
 		}
 	}
 }
